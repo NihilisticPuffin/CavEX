@@ -16,7 +16,7 @@
 	You should have received a copy of the GNU General Public License
 	along with CavEX.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include "../network/server_local.h"
 #include "blocks.h"
 
 static enum block_material getMaterial1(struct block_info* this) {
@@ -80,6 +80,41 @@ static size_t getDroppedItem(struct block_info* this, struct item_data* it,
 	return 0;
 }
 
+static void onRightClick(struct server_local* s, struct item_data* it,
+						 struct block_info* where, struct block_info* on,
+						 enum side on_side) {
+   int toggle[] = { 4, 5, 6, 7, 0, 1, 2, 3, 12, 13, 14, 15, 8, 9, 10, 11 };
+   struct block_data blk;
+
+	if (on->block->metadata <= 7) {
+		if(server_world_get_block(&s->world, on->x, on->y+1, on->z, &blk)) {
+			if (blk.type == BLOCK_WOODEN_DOOR) {
+				server_world_set_block(&s->world, on->x, on->y+1, on->z,
+					(struct block_data) {
+						.type = BLOCK_WOODEN_DOOR,
+						.metadata = toggle[on->block->metadata + 8],
+					});
+			}
+		}
+   } else {
+		if(server_world_get_block(&s->world, on->x, on->y-1, on->z, &blk)) {
+			if (blk.type == BLOCK_WOODEN_DOOR) {
+				server_world_set_block(&s->world, on->x, on->y-1, on->z,
+					(struct block_data) {
+						.type = BLOCK_WOODEN_DOOR,
+						.metadata = toggle[on->block->metadata - 8],
+					});
+			}
+		}
+	}
+	
+	server_world_set_block(&s->world, on->x, on->y, on->z,
+		(struct block_data) {
+			.type = BLOCK_WOODEN_DOOR,
+			.metadata = toggle[on->block->metadata],
+		});
+}
+
 struct block block_wooden_door = {
 	.name = "Wooden Door",
 	.getSideMask = getSideMask,
@@ -88,7 +123,7 @@ struct block block_wooden_door = {
 	.getTextureIndex = getTextureIndex1,
 	.getDroppedItem = getDroppedItem,
 	.onRandomTick = NULL,
-	.onRightClick = NULL,
+	.onRightClick = onRightClick,
 	.transparent = false,
 	.renderBlock = render_block_door,
 	.renderBlockAlways = NULL,

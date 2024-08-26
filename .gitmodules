@@ -1,0 +1,15 @@
+[submodule "source/lodepng"]
+	path = source/lodepng
+	url = git@github.com:lvandeve/lodepng
+[submodule "lib/m-lib"]
+	path = lib/m-lib
+	url = git@github.com:P-p-H-d/mlib.git
+[submodule "source/cNBT"]
+	path = source/cNBT
+	url = git@github.com:chmod222/cNBT.git
+[submodule "source/parson"]
+	path = source/parson
+	url = git@github.com:kgabis/parson.git
+[submodule "lib/cglm"]
+	path = lib/cglm
+	url = git@github.com:recp/cglm.git

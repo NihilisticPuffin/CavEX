@@ -21,7 +21,7 @@
 #include <GLFW/glfw3.h>
 #include <assert.h>
 #include <m-lib/m-string.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
@@ -134,13 +134,13 @@ void gfx_setup() {
 	string_init(shader_file);
 
 	string_printf(
-		shader_file, "%s/vertex.shader",
+		shader_file, "%s/shaders/vertex.shader",
 		config_read_string(&gstate.config_user, "paths.texturepack", "assets"));
 	void* vertex = file_read(string_get_cstr(shader_file));
 	assert(vertex);
 
 	string_printf(
-		shader_file, "%s/fragment.shader",
+		shader_file, "%s/shaders/fragment.shader",
 		config_read_string(&gstate.config_user, "paths.texturepack", "assets"));
 	void* fragment = file_read(string_get_cstr(shader_file));
 	assert(fragment);
@@ -368,7 +368,7 @@ void gfx_cull_func(enum cull_func func) {
 	switch(func) {
 		case MODE_FRONT: glCullFace(GL_FRONT); break;
 		case MODE_BACK: glCullFace(GL_BACK); break;
-		default:
+		default: break;
 	}
 }
 

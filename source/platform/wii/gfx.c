@@ -19,7 +19,7 @@
 
 #include <assert.h>
 #include <gccore.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 

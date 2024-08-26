@@ -145,6 +145,8 @@ add_executable(cavex
 
 target_compile_definitions(cavex PRIVATE PLATFORM_PC CGLM_ALL_UNALIGNED)
 
+target_include_directories(cavex PRIVATE lib)
+
 set_target_properties(
 	cavex PROPERTIES
 	C_STANDARD 99

@@ -19,7 +19,7 @@
 
 #include <GL/glew.h>
 #include <assert.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "../displaylist.h"

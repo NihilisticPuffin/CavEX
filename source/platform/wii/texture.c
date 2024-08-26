@@ -19,7 +19,7 @@
 
 #include <assert.h>
 #include <gccore.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define rgba16(r, g, b, a)                                                     \

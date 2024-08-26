@@ -29,7 +29,7 @@
 #include "../../platform/input.h"
 #include "../game_state.h"
 
-#include <malloc.h>
+#include <stdlib.h>
 
 static void screen_ingame_reset(struct screen* s, int width, int height) {
 	input_pointer_enable(false);
